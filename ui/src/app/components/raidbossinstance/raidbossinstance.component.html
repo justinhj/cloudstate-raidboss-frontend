@@ -1,0 +1,32 @@
+<form class="form" (ngSubmit)="onSubmit()">
+
+    <h3>Raid boss instance {{ activeBoss ? activeBoss.instanceId : "None" }}</h3>
+
+    <table class="u-full-width">
+        <thead>
+        <tr>
+            <th>Boss def ID</th>
+            <th>Health</th>
+            <th>Leaderboard</th>
+            <th>attack</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td>{{ activeBoss ? activeBoss.bossDefId : "?" }}</td>
+            <td>{{ activeBoss ? activeBoss.health : "?" }}</td>
+            <td>{{ activeBoss ? activeBoss.leaderboard : "?" }}</td>
+            <td>
+                <label for="playerid">Player ID</label>
+                <input [(ngModel)]="playerId" type="text" name="playerid" required>
+                <label for="damage">Damage</label>
+                <input [(ngModel)]="damage" name="damage" type="number" required>
+                <button mat-button type="submit" class="btn btn-success">Attack</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</form>

@@ -1,0 +1,18 @@
+<app-create-boss
+    (createRaidBoss)="addRaidBoss($event)">
+</app-create-boss>
+<h3>List of active raid bosses</h3>
+<app-active-boss
+    *ngFor="let raidboss of raidbosses"
+    [raidBossInstance]="raidboss"
+    (click)="clickRaidBoss(raidboss)"
+    >
+</app-active-boss>
+<app-raidbossinstance
+    [activeBoss]="activeBoss"
+    (attackRaidBoss)="attackRaidBoss($event)"
+    >
+</app-raidbossinstance>
+<app-get-bosses
+    (getGroupBossesSince)="getGroupBossesSince($event)">
+</app-get-bosses>

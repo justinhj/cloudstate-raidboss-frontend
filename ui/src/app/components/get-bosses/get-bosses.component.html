@@ -1,0 +1,17 @@
+<form class="form" (ngSubmit)="onSubmit()">
+
+    <h3>Get group raid bosses</h3>
+
+    <div class="form-group">
+        <label for="groupId">Group ID</label>
+        <input [(ngModel)]="groupId" type="text" name="groupid" required>
+    </div>
+    <div class="form-group">
+        <label for="time">Since timestamp</label>
+        <input [(ngModel)]="time" name="time" type="number" required>
+    </div>
+    <div class="form-group">
+        <button mat-button type="submit" class="btn btn-success">Get</button>
+    </div>
+
+</form>
