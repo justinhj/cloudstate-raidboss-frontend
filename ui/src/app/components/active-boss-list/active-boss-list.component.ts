@@ -30,7 +30,7 @@ export class ActiveBossListComponent implements OnInit {
 
   getGroupBossesSince(event) {
     this.raidBossService.getGroupBossesSince(event.groupId, event.time).subscribe(bosses => {
-      map(boss => {
+      map((boss: RaidBossInstance) => {
         var existing = this.raidbosses.find(b1 => b1.instanceId == boss.instanceId);
         if(existing) {
           existing = boss

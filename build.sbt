@@ -17,6 +17,11 @@ def dockerSettings = Seq(
   dockerExposedPorts := Seq(80, 443)
   )
 
+// handle protobuffer conversion for Javascript to use
+// For now do this manually
+
+// convertprotobuf.sh
+
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
   .settings(
     watchSources ++= (baseDirectory.value / "public/ui" ** "*").get
