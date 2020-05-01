@@ -2,15 +2,24 @@
 
 ## Raid boss project
 
-Please see here for more general documentation
-
-[https://gitlab.yoppworks.com/raidboss/raidboss-backend/blob/master/README.md](https://gitlab.yoppworks.com/raidboss/raidboss-backend/blob/master/README.md)
+TODO bring in more documentation from the Lagom version
 
 ## Running
 
 Clone the repo and install sbt.
 Execute `sbt run`.
-Connect to the indicated local server.
+
+TODO Show how to configure to run against local Cloudstate server using envoy
+
+### Running universal build
+
+```
+sbt dist
+
+unzip ~/cloudstate-raidboss-frontend/target/universal/scala-play-angular-seed-1.0-SNAPSHOT.zip
+
+java -Dconfig.file=./conf/application.conf -cp "./lib/*:./conf/*" -Dhttp.port=3000 -Dplay.http.secret.key='your secret' play.core.server.ProdServerStart
+```
 
 ## Implemetation details
 
@@ -18,9 +27,15 @@ Connect to the indicated local server.
 
 This Play/Angular application was based on this seed project https://github.com/yohangz/scala-play-angular-seed
 
-We have built for the purposes of prototyping and testing, a Play/Angular frontend for the raid boss cloudstate service
-Note that the end goal is that the raid boss service is not user facing, it is instead used as an internal service
-Client services are responsible for verification that the boss definition exists, the players and groups are real and that attacks are authorized (the players have the game currency to make them).
+Play/Angular frontend for the raid boss cloudstate service.
+
+Note that the end goal is that the raid boss service is not user facing, it is instead used as an internal service and not a game in itself.
+
+Client services are responsible for verification that the boss definition exists, the players and groups are real and that attacks are authorized (the players are usually limited in how many attacks they can make on a boss by some game resource they must collect).
+
+### gRPC details
+
+In order to communicate with the Cloudstate raidboss entity we must use gRPC, and since we want to access it from our client side web application code we will use [grpc-web](https://github.com/grpc/grpc-web)   
 
 ### Components
 
@@ -30,4 +45,8 @@ Client services are responsible for verification that the boss definition exists
 
 ### Further work
 
-Use the ngrx module for state management
+TODO Use the ngrx module for state management
+TODO Build the protobuf files from the npm or sbt build rather than manually
+TODO expose the server url as config not hardwired
+TODO instructions to build and deploy the image
+TODO remove temporarily the get active raid bosses from the web app
