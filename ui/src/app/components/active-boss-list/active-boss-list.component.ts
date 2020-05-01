@@ -50,13 +50,13 @@ export class ActiveBossListComponent implements OnInit {
   attackRaidBoss(event) {
     this.raidBossService.attackBoss(event.bossInstanceId, event.playerId, event.damage).subscribe(
       result  => {
-        if(result.damage > 0 && result.health == 0) {
-          // TODO react to player killed boss
-        } else if (result.health == 0) {
-          // TODO react to boss was dead
-        } else {
-          // TODO react to normal damage event
-        }
+        // if(result.damage > 0 && result.health == 0) {
+        //   // TODO react to player killed boss
+        // } else if (result.health == 0) {
+        //   // TODO react to boss was dead
+        // } else {
+        //   // TODO react to normal damage event
+        // }
         // update local boss
         var x = this.raidbosses.find(boss => boss.instanceId == event.bossInstanceId);
         if(x) {
