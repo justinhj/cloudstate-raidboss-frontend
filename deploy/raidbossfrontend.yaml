@@ -1,0 +1,9 @@
+# Stateful service descriptor
+apiVersion: cloudstate.io/v1alpha1
+kind: StatefulService
+metadata:
+  name: raidbossfrontend
+spec:
+  containers:
+  - image: justinhj/raidbossfrontend:latest
+    name: raidbossfrontend
