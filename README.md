@@ -35,7 +35,7 @@ Client services are responsible for verification that the boss definition exists
 
 ### gRPC details
 
-In order to communicate with the Cloudstate raidboss entity we must use gRPC, and since we want to access it from our client side web application code we will use [grpc-web](https://github.com/grpc/grpc-web)   
+In order to communicate with the Cloudstate raidboss entity we must use gRPC, and since we want to access it from our client side web application code we will use [grpc-web](https://github.com/grpc/grpc-web)
 
 ### Components
 
@@ -49,4 +49,4 @@ TODO Use the ngrx module for state management
 TODO Build the protobuf files from the npm or sbt build rather than manually
 TODO expose the server url as config not hardwired
 TODO instructions to build and deploy the image
-TODO remove temporarily the get active raid bosses from the web app
+DONE remove temporarily the get active raid bosses from the web app

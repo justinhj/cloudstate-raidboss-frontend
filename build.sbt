@@ -17,7 +17,6 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
   .settings(
     watchSources ++= (baseDirectory.value / "public/ui" ** "*").get
   )
-  .settings(dockerSettings)
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
