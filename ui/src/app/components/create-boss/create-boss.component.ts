@@ -9,6 +9,7 @@ export class CreateBossComponent implements OnInit {
 
   @Output() createRaidBoss: EventEmitter<any> = new EventEmitter();
 
+  instanceId:string;
   groupId:string;
   bossDefinitionId:string;
 
@@ -20,6 +21,7 @@ export class CreateBossComponent implements OnInit {
 
   onSubmit() {
     this.createRaidBoss.emit({
+      instanceId: this.instanceId,
       groupId: this.groupId,
       bossDefinitionId : this.bossDefinitionId
     })

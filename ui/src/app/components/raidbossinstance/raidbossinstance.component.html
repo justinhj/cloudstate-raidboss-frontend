@@ -7,7 +7,6 @@
         <tr>
             <th>Boss def ID</th>
             <th>Health</th>
-            <th>Leaderboard</th>
             <th>attack</th>
         </tr>
         </thead>
@@ -16,7 +15,6 @@
         <tr>
             <td>{{ activeBoss ? activeBoss.bossDefId : "?" }}</td>
             <td>{{ activeBoss ? activeBoss.health : "?" }}</td>
-            <td>{{ activeBoss ? activeBoss.leaderboard : "?" }}</td>
             <td>
                 <label for="playerid">Player ID</label>
                 <input [(ngModel)]="playerId" type="text" name="playerid" required>
@@ -30,3 +28,21 @@
     </table>
 
 </form>
+
+<div>
+<H3>Damage Leaderboard</H3>
+    <table class="u-full-width">
+        <thead>
+            <tr>
+                <td>Player</td>
+                <td>Score</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let entry of activeBoss.leaderboard">
+                <td>{{ entry.playerId }} </td>
+                <td>{{ entry.score }} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

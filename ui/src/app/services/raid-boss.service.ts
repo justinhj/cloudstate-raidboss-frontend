@@ -1,12 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from "rxjs";
-import { RaidBossInstance } from '../models/raid-boss-instance';
+import { RaidBossInstance, LeaderboardEntry } from '../models/raid-boss-instance';
 import { RaidBossAttackResult } from '../models/raid-boss-attack-result';
 import { WebsocketService } from "./websocket.service";
 import { map } from 'rxjs/operators';
 import { RaidBossServiceClient, UnaryResponse, ServiceError } from "../../_proto/raidbossservice_pb_service";
-import { RaidBossCreate, RaidBossAttack, RaidBossInstance as GrpcRaidBossInstance, LeaderboardEntry } from "../../_proto/raidbossservice_pb";
+import { RaidBossCreate, RaidBossAttack, RaidBossInstance as GrpcRaidBossInstance, LeaderboardEntry as GrpcLeaderboardEntry } from "../../_proto/raidbossservice_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 import * as jspb from "google-protobuf";
 
@@ -31,7 +31,7 @@ export class RaidBossService implements OnInit {
   // TODO hostname should go in config
   //private base_url = "localhost:4200/raidbossapi/raidboss/";
 
-  // TODO hostname should go in config
+  // TODO cloudstate service hostname should go in config
   private raidbossClient = new RaidBossServiceClient('https://justin-test-1.us-east1.apps.lbcs.io');
 
   constructor(private http: HttpClient, private webSocketService : WebsocketService) {
@@ -52,11 +52,24 @@ export class RaidBossService implements OnInit {
     // });
   }
 
+  private fromGrpcLeaderboard(grpcEntries: GrpcLeaderboardEntry[]): LeaderboardEntry[] {
+
+    var entries: LeaderboardEntry[] = []
+
+    grpcEntries.forEach(
+      function(entry) {
+        entries.push(new LeaderboardEntry(entry.getPlayerId(), entry.getScore()));
+      }
+    );
+
+    return entries;
+  }
+
   private fromGrpcRaidBoss(grpcInstance: GrpcRaidBossInstance): RaidBossInstance {
     return new RaidBossInstance(grpcInstance.getBossDefId(),
       grpcInstance.getHealth(),
       grpcInstance.getBossInstanceId(),
-      [], // TODO need to convert leaderboard type
+      this.fromGrpcLeaderboard(grpcInstance.getLeaderboardList()),
       grpcInstance.getCreated(),
       grpcInstance.getUpdated(),
       grpcInstance.getGroupId());
@@ -68,6 +81,8 @@ export class RaidBossService implements OnInit {
     message.setBossInstanceId(instance);
     message.setBossDefId(bossDefinitionId);
     message.setGroupId(groupId);
+
+    console.log("Sending boss create ", message.getBossInstanceId());
 
     return new Observable<RaidBossInstance>(obs => {
       const req = this.raidbossClient.createRaidBoss(message, (err: ServiceError, response: GrpcRaidBossInstance) => {
