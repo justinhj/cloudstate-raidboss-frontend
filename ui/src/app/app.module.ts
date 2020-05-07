@@ -13,6 +13,7 @@ import { ActiveBossListComponent } from './components/active-boss-list/active-bo
 import { ActiveBossComponent } from './components/active-boss/active-boss.component';
 import { RaidbossinstanceComponent } from './components/raidbossinstance/raidbossinstance.component';
 import { GetBossesComponent } from './components/get-bosses/get-bosses.component';
+import { IdenticonHashDirective } from './identicon-hash.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { GetBossesComponent } from './components/get-bosses/get-bosses.component
     ActiveBossListComponent,
     ActiveBossComponent,
     RaidbossinstanceComponent,
-    GetBossesComponent
+    GetBossesComponent,
+    IdenticonHashDirective
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,7 @@ import { GetBossesComponent } from './components/get-bosses/get-bosses.component
     MatButtonModule,
     HttpClientModule,
     FormsModule
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

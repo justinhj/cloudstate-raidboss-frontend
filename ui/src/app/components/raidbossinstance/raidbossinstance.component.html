@@ -40,7 +40,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let entry of activeBoss.leaderboard">
-                <td>{{ entry.playerId }} </td>
+                <td><svg width="20" height="20" [identiconHash]="entry.playerId"></svg> {{ entry.playerId }}</td>
                 <td>{{ entry.score }} </td>
             </tr>
         </tbody>
