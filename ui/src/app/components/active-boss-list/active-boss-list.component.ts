@@ -42,7 +42,7 @@ export class ActiveBossListComponent implements OnInit {
   }
 
   addRaidBoss(raidBoss) {
-    this.raidBossService.createBoss(raidBoss.groupId, raidBoss.bossDefinitionId).subscribe(boss => {
+    this.raidBossService.createBoss(raidBoss.instanceId, raidBoss.groupId, raidBoss.bossDefinitionId).subscribe(boss => {
       this.raidbosses.push(boss);
     });
   }

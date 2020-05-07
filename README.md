@@ -21,6 +21,18 @@ unzip ~/cloudstate-raidboss-frontend/target/universal/scala-play-angular-seed-1.
 java -Dconfig.file=./conf/application.conf -cp "./lib/*:./conf/*" -Dhttp.port=3000 -Dplay.http.secret.key='your secret' play.core.server.ProdServerStart
 ```
 
+### Build the Docker image
+
+```
+sbt dist
+DOCKER_PUBLISH_TO=[YOUR DOCKER REGISTRY] ./builddocker.sh
+docker push [YOUR DOCKER REGISTRY]/raidbossfrontend
+```
+
+### Run the Docker image
+
+`docker run -p 80:3000 [YOUR DOCKER REGISTRY]/raidbossfrontend`
+
 ## Implemetation details
 
 ## Frontend

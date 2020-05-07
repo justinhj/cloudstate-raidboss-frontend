@@ -62,9 +62,8 @@ export class RaidBossService implements OnInit {
       grpcInstance.getGroupId());
   }
 
-  createBoss(groupId: string, bossDefinitionId: string): Observable<RaidBossInstance> {
+  createBoss(instance: string, groupId: string, bossDefinitionId: string): Observable<RaidBossInstance> {
 
-    let instance = "raidbossinstance-" + groupId + "-" + bossDefinitionId + "-" + Date.now();
     let message = new RaidBossCreate();
     message.setBossInstanceId(instance);
     message.setBossDefId(bossDefinitionId);
