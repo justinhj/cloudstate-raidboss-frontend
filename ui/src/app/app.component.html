@@ -5,13 +5,15 @@
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <div fxLayout='column' class="zero">
-
-    <h4>
-      {{ description }}
-    </h4>
-
-    <app-active-boss-list></app-active-boss-list>
+  <div fxLayout='row' class="zero">
+    <div fxFlex="5%" [fxLayout]="direction" class="one"></div>
+    <div fxFlex="67%" [fxLayout]="direction" class="two">
+      <h4>
+        {{ description }}
+      </h4>
+      <app-active-boss-list></app-active-boss-list>
+    </div>
+    <div fxFlex="28%" [fxLayout]="direction" class="three"></div>
   </div>
 </div>
 
