@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title : string = 'Raid Boss - Cloudstate';
+  title : string = 'Raid Boss - Cloudstate example';
   description : string = 'Summon and attack raid bosses'
 
   constructor() {

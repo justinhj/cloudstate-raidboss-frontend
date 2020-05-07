@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { CreateBossComponent } from './components/create-boss/create-boss.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { ActiveBossListComponent } from './components/active-boss-list/active-boss-list.component';
@@ -14,6 +15,8 @@ import { ActiveBossComponent } from './components/active-boss/active-boss.compon
 import { RaidbossinstanceComponent } from './components/raidbossinstance/raidbossinstance.component';
 import { GetBossesComponent } from './components/get-bosses/get-bosses.component';
 import { IdenticonHashDirective } from './identicon-hash.directive';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -31,9 +34,11 @@ import { IdenticonHashDirective } from './identicon-hash.directive';
     BrowserAnimationsModule,
     MatSliderModule,
     MatListModule,
+    MatToolbarModule,
     MatButtonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FlexLayoutModule
     ],
   providers: [],
   bootstrap: [AppComponent]

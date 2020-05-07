@@ -57,8 +57,8 @@ In order to communicate with the Cloudstate raidboss entity we must use gRPC, an
 
 ### Further work
 
-TODO Use the ngrx module for state management
-TODO Build the protobuf files from the npm or sbt build rather than manually
-TODO expose the server url as config not hardwired
-TODO instructions to build and deploy the image
-DONE remove temporarily the get active raid bosses from the web app
+Use the ngrx module for state management
+Build the protobuf files from the npm or sbt build rather than manually
+Expose the server url as config not hardwired
+Instructions to build and deploy the image
+Better error handling
