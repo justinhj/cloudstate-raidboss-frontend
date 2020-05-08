@@ -9,7 +9,11 @@ TODO bring in more documentation from the Lagom version
 Clone the repo and install sbt.
 Execute `sbt run`.
 
-TODO Show how to configure to run against local Cloudstate server using envoy
+### Configuring the server
+
+In `./ui/src/environments/environment.prod.ts` and `environment.ts` make sure the Cloudstate host points at the correct Lightbend Cloudstate project... 
+
+`cloudstatehost: "https://justin-test-1.us-east1.apps.lbcs.io"`
 
 ### Running universal build
 

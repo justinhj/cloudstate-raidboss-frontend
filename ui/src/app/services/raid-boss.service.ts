@@ -9,6 +9,7 @@ import { RaidBossServiceClient, UnaryResponse, ServiceError } from "../../_proto
 import { RaidBossCreate, RaidBossAttack, RaidBossInstance as GrpcRaidBossInstance, LeaderboardEntry as GrpcLeaderboardEntry } from "../../_proto/raidbossservice_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 import * as jspb from "google-protobuf";
+import { environment } from '../../environments/environment';
 
 //const FEED_URL = "ws://localhost:4200/raidbossapi/stream/raidboss/all-events";
 
@@ -28,14 +29,11 @@ export class RaidBossService implements OnInit {
 
   public messages: Subject<RaidBossEventMessage>;
 
-  // TODO hostname should go in config
-  //private base_url = "localhost:4200/raidbossapi/raidboss/";
-
-  // TODO cloudstate service hostname should go in config
-  private raidbossClient = new RaidBossServiceClient('https://justin-test-1.us-east1.apps.lbcs.io');
+  private raidbossClient = new RaidBossServiceClient(environment.cloudstatehost);
 
   constructor(private http: HttpClient, private webSocketService : WebsocketService) {
     // This is dead for now but can be used to ingest data from a websocket
+    // if you have a streaming source of events
     // webSocketService.connect(FEED_URL).subscribe({
     //   next: (response: MessageEvent) => {
     //     let data = JSON.parse(response.data);
@@ -104,9 +102,6 @@ export class RaidBossService implements OnInit {
 
   // Handle attacks
   attackBoss(bossInstanceId: string, playerId: string, damage: number) : Observable<RaidBossInstance> {
-    // return this.http.put("http://" + this.base_url + "attack/" + bossInstanceId + "/"
-    //   + playerId + "/" + damage, null, {})
-
     let message = new RaidBossAttack();
     message.setBossInstanceId(bossInstanceId);
     message.setDamage(damage);

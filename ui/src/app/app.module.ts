@@ -17,7 +17,6 @@ import { GetBossesComponent } from './components/get-bosses/get-bosses.component
 import { IdenticonHashDirective } from './identicon-hash.directive';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
 @NgModule({
   declarations: [
     AppComponent,
