@@ -11,7 +11,7 @@ Execute `sbt run`.
 
 ### Configuring the server
 
-In `./ui/src/environments/environment.prod.ts` and `environment.ts` make sure the Cloudstate host points at the correct Lightbend Cloudstate project... 
+In `./ui/src/environments/environment.prod.ts` and `environment.ts` make sure the Cloudstate host points at the correct Lightbend Cloudstate project...
 
 `cloudstatehost: "https://justin-test-1.us-east1.apps.lbcs.io"`
 
@@ -19,7 +19,11 @@ In `./ui/src/environments/environment.prod.ts` and `environment.ts` make sure th
 
 ```
 sbt dist
+```
 
+This creates universal build which you can deploy by unzipping and running a command as follows:
+
+```
 unzip ~/cloudstate-raidboss-frontend/target/universal/scala-play-angular-seed-1.0-SNAPSHOT.zip
 
 java -Dconfig.file=./conf/application.conf -cp "./lib/*:./conf/*" -Dhttp.port=3000 -Dplay.http.secret.key='your secret' play.core.server.ProdServerStart

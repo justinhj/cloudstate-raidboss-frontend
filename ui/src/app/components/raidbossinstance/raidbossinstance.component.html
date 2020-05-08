@@ -1,48 +1,53 @@
-<form class="form" (ngSubmit)="onSubmit()">
 
-    <h3>Raid boss instance {{ activeBoss ? activeBoss.instanceId : "None" }}</h3>
+<div fxLayout="column" fxLayoutGap="32px">
 
-    <table class="u-full-width">
-        <thead>
-        <tr>
-            <th>Boss def ID</th>
-            <th>Health</th>
-            <th>attack</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="form">
 
-        <tr>
-            <td>{{ activeBoss ? activeBoss.bossDefId : "?" }}</td>
-            <td>{{ activeBoss ? activeBoss.health : "?" }}</td>
-            <td>
-                <label for="playerid">Player ID</label>
-                <input [(ngModel)]="playerId" type="text" name="playerid" required>
-                <label for="damage">Damage</label>
-                <input [(ngModel)]="damage" name="damage" type="number" required>
-                <button mat-button type="submit" class="btn btn-success">Attack</button>
-            </td>
-        </tr>
+        <h3>Raid boss instance (id) {{ activeBoss ? activeBoss.instanceId : "None" }}</h3>
 
-        </tbody>
-    </table>
-
-</form>
-
-<div>
-<H3>Damage Leaderboard</H3>
-    <table class="u-full-width">
-        <thead>
+        <table class="u-full-width">
+            <thead>
             <tr>
-                <td>Player</td>
-                <td>Score</td>
+                <th>Boss def ID</th>
+                <th>Health</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let entry of activeBoss.leaderboard">
-                <td><svg width="20" height="20" [identiconHash]="entry.playerId"></svg> {{ entry.playerId }}</td>
-                <td>{{ entry.score }} </td>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td>{{ activeBoss ? activeBoss.bossDefId : "?" }}</td>
+                <td>{{ activeBoss ? activeBoss.health : "?" }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+
+    <form class="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="playerid">Player ID</label>
+            <input [(ngModel)]="playerId" type="text" name="playerid" required>
+            <label for="damage">Damage</label>
+            <input [(ngModel)]="damage" name="damage" type="number" required>
+            <button mat-button type="submit" class="btn btn-success">Attack</button>
+        </div>
+    </form>
+
+    <div>
+        <H3>Damage Leaderboard</H3>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <td>Player</td>
+                        <td>Score</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let entry of activeBoss.leaderboard">
+                        <td><svg width="20" height="20" [identiconHash]="entry.playerId"></svg> {{ entry.playerId }}</td>
+                        <td>{{ entry.score }} </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+
 </div>

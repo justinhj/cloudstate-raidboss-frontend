@@ -1,6 +1,9 @@
 <form class="form" (ngSubmit)="onSubmit()">
     <h3>Summon Raid Boss</h3>
-        <div class="form-group">
+
+    <div fxLayout="row" fxLayoutGap="32px">
+
+      <div class="form-group">
         <label for="groupId">Instance ID</label>
         <input type="text" class="form-control" name="instanceId" required [(ngModel)]="instanceId">
       </div>
@@ -12,6 +15,8 @@
         <label for="bossDefinitionId">Boss Type</label>
         <input type="text" class="form-control" name="bossDefinitionId" required [(ngModel)]="bossDefinitionId">
       </div>
+
+    </div>
 
       <button mat-button type="submit" class="btn btn-success">Summon</button>
 </form>
