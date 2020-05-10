@@ -1,6 +1,7 @@
 <div>
-    {{ raidBossInstance.bossDefId }}
-    {{ raidBossInstance.groupId }}
-    {{ raidBossInstance.health }}
-
+    <b>{{ raidBossInstance.instanceId }}</b>:
+    {{ raidBossInstance.bossDefId }} -
+    {{ raidBossInstance.groupId }} -
+    {{ raidBossInstance.health }} -
+    {{ raidBossInstance.killedBy == "" ? "Alive" : "Killed by " + raidBossInstance.killedBy }}
 </div>

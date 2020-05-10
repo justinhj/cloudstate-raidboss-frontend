@@ -3,7 +3,7 @@
 
     <div class="form">
 
-        <h3>Raid boss instance (id) {{ activeBoss ? activeBoss.instanceId : "None" }}</h3>
+        <h3>Raid boss instance id - {{ activeBoss ? activeBoss.instanceId : "(Summon and select a boss above)" }}</h3>
 
         <table class="u-full-width">
             <thead>
@@ -42,10 +42,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let entry of activeBoss.leaderboard">
-                        <td><svg width="20" height="20" [identiconHash]="entry.playerId"></svg> {{ entry.playerId }}</td>
-                        <td>{{ entry.score }} </td>
-                    </tr>
+                    <div *ngIf="activeBoss">
+                        <tr *ngFor="let entry of activeBoss.leaderboard">
+                            <td><svg width="20" height="20" [identiconHash]="entry.playerId"></svg> {{ entry.playerId }}</td>
+                            <td>{{ entry.score }} </td>
+                        </tr>
+                    </div>
                 </tbody>
             </table>
     </div>

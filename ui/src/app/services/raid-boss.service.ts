@@ -2,13 +2,9 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from "rxjs";
 import { RaidBossInstance, LeaderboardEntry } from '../models/raid-boss-instance';
-import { RaidBossAttackResult } from '../models/raid-boss-attack-result';
 import { WebsocketService } from "./websocket.service";
-import { map } from 'rxjs/operators';
-import { RaidBossServiceClient, UnaryResponse, ServiceError } from "../../_proto/raidbossservice_pb_service";
+import { RaidBossServiceClient, ServiceError } from "../../_proto/raidbossservice_pb_service";
 import { RaidBossCreate, RaidBossAttack, RaidBossInstance as GrpcRaidBossInstance, LeaderboardEntry as GrpcLeaderboardEntry } from "../../_proto/raidbossservice_pb";
-import {grpc} from "@improbable-eng/grpc-web";
-import * as jspb from "google-protobuf";
 import { environment } from '../../environments/environment';
 
 //const FEED_URL = "ws://localhost:4200/raidbossapi/stream/raidboss/all-events";
@@ -70,7 +66,8 @@ export class RaidBossService implements OnInit {
       this.fromGrpcLeaderboard(grpcInstance.getLeaderboardList()),
       grpcInstance.getCreated(),
       grpcInstance.getUpdated(),
-      grpcInstance.getGroupId());
+      grpcInstance.getGroupId(),
+      grpcInstance.getKilledBy());
   }
 
   createBoss(instance: string, groupId: string, bossDefinitionId: string): Observable<RaidBossInstance> {
@@ -80,7 +77,7 @@ export class RaidBossService implements OnInit {
     message.setBossDefId(bossDefinitionId);
     message.setGroupId(groupId);
 
-    console.log("Sending boss create ", message.getBossInstanceId());
+    console.log("Sending boss create ", message.getBossInstanceId(), " ", message.getBossDefId(), " ", message.getGroupId());
 
     return new Observable<RaidBossInstance>(obs => {
       const req = this.raidbossClient.createRaidBoss(message, (err: ServiceError, response: GrpcRaidBossInstance) => {
@@ -95,10 +92,6 @@ export class RaidBossService implements OnInit {
       return () => req.cancel();
     });
   }
-
-  // case class RaidBossAttackResultMessage(
-  //   damage: Long,
-  //   health: Long)
 
   // Handle attacks
   attackBoss(bossInstanceId: string, playerId: string, damage: number) : Observable<RaidBossInstance> {
@@ -124,7 +117,7 @@ export class RaidBossService implements OnInit {
 
   // Get all bosses by group Id and date, used for example when a player wants to find bosses
   // to fight or view dead ones...
-  // TODO this requires read-side projection
+  // TODO this requires read-side projection and is not implemented yet
   getGroupBossesSince(groupId: string, time: number) : Observable<any> {
     return this.http.get("/raidbossapi/raidboss/list/" + groupId + "/" + time)
   }

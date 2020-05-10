@@ -3,9 +3,6 @@ import { RaidBossService } from '../../services/raid-boss.service';
 import { RaidBossInstance } from 'src/app/models/raid-boss-instance';
 import map from "lodash/fp/map";
 
-// TODO rename this, it is just a list of boss instances
-// not an active boss list
-
 @Component({
   selector: 'app-active-boss-list',
   templateUrl: './active-boss-list.component.html',
@@ -28,6 +25,7 @@ export class ActiveBossListComponent implements OnInit {
     this.activeBoss = boss
   }
 
+  // Note this requires read side DB and is not implemented in the cloudstate version yet
   getGroupBossesSince(event) {
     this.raidBossService.getGroupBossesSince(event.groupId, event.time).subscribe(bosses => {
       map((boss: RaidBossInstance) => {
@@ -43,6 +41,8 @@ export class ActiveBossListComponent implements OnInit {
 
   addRaidBoss(raidBoss) {
     this.raidBossService.createBoss(raidBoss.instanceId, raidBoss.groupId, raidBoss.bossDefinitionId).subscribe(boss => {
+      console.log("Adding boss ", boss, "from", raidBoss, " event");
+
       this.raidbosses.push(boss);
     });
   }

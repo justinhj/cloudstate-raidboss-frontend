@@ -1,7 +1,7 @@
 <app-create-boss
     (createRaidBoss)="addRaidBoss($event)">
 </app-create-boss>
-<h3>List of known raid bosses</h3>
+<h3>Raid bosses</h3>
 <app-active-boss
     *ngFor="let raidboss of raidbosses"
     [raidBossInstance]="raidboss"

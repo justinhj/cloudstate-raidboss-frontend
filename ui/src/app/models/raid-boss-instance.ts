@@ -19,6 +19,7 @@ export class RaidBossInstance {
     created: number
     updated: number
     groupId: string
+    killedBy: string
 
     constructor(
         bossDefId: string,
@@ -27,7 +28,8 @@ export class RaidBossInstance {
         leaderboard: LeaderboardEntry [],
         created: number,
         updated: number,
-        groupId: string) {
+        groupId: string,
+        killedBy: string) {
             this.bossDefId = bossDefId;
             this.health = health;
             this.instanceId = instanceId;
@@ -35,5 +37,6 @@ export class RaidBossInstance {
             this.created = created;
             this.updated = updated;
             this.groupId = groupId;
+            this.killedBy = killedBy;
         }
 }
