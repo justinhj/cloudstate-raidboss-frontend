@@ -28,28 +28,28 @@
             <input [(ngModel)]="playerId" type="text" name="playerid" required>
             <label for="damage">Damage</label>
             <input [(ngModel)]="damage" name="damage" type="number" required>
-            <button mat-button type="submit" class="btn btn-success">Attack</button>
+            <button mat-raised-button type="submit" matTooltip="Choose a player id and damage amount to simulate an attack which will then update the boss and the leaderboard below" class="btn btn-success">Attack</button>
         </div>
     </form>
 
     <div>
         <H3>Damage Leaderboard</H3>
-            <table class="u-full-width">
-                <thead>
-                    <tr>
-                        <td>Player</td>
-                        <td>Score</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <div *ngIf="activeBoss">
+            <div *ngIf="activeBoss">
+                <table class="u-full-width">
+                    <thead>
+                        <tr>
+                            <td>Player</td>
+                            <td>Score</td>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <tr *ngFor="let entry of activeBoss.leaderboard">
                             <td><svg width="20" height="20" [identiconHash]="entry.playerId"></svg> {{ entry.playerId }}</td>
                             <td>{{ entry.score }} </td>
                         </tr>
-                    </div>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
     </div>
 
 </div>

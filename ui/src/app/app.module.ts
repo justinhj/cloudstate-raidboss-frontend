@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateBossComponent } from './components/create-boss/create-boss.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { ActiveBossListComponent } from './components/active-boss-list/active-boss-list.component';
@@ -34,6 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSliderModule,
     MatListModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatButtonModule,
     HttpClientModule,
     FormsModule,

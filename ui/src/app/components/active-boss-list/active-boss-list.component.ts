@@ -55,6 +55,7 @@ export class ActiveBossListComponent implements OnInit {
         if(x) {
           x.health = result.health
           x.leaderboard = result.leaderboard
+          x.killedBy = result.killedBy
         }
     });
   }
