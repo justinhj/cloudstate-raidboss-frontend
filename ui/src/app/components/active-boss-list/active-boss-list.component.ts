@@ -44,11 +44,18 @@ export class ActiveBossListComponent implements OnInit {
       flatMap(result =>
         this.raidBossService.viewBoss(raidBoss.instanceId))
     ).subscribe(boss => {
-      //console.log("Create boss ", raidBoss.instanceId, boss);
-      console.log("Adding boss ", boss, "from", raidBoss, " event");
 
-      // TODO if it succeeds need to view boss and add to list
-      this.raidbosses.push(boss);
+      var existingBoss = this.raidbosses.find(boss => boss.instanceId == boss.instanceId);
+      if(existingBoss) {
+        // update local boss
+        console.log("Updating boss ", boss.instanceId);
+        if(existingBoss) {
+          existingBoss = boss;
+        }
+      } else {
+        console.log("Adding boss ", boss, "from", raidBoss, " event");
+        this.raidbosses.push(boss);
+      }
     });
   }
 
