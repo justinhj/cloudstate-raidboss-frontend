@@ -4,8 +4,9 @@ import { Observable, Subject } from "rxjs";
 import { RaidBossInstance, LeaderboardEntry } from '../models/raid-boss-instance';
 import { WebsocketService } from "./websocket.service";
 import { RaidBossServiceClient, ServiceError } from "../../_proto/raidbossservice_pb_service";
-import { RaidBossCreate, RaidBossAttack, RaidBossInstance as GrpcRaidBossInstance, LeaderboardEntry as GrpcLeaderboardEntry } from "../../_proto/raidbossservice_pb";
+import { RaidBossCreate, RaidBossAttack, RaidBossInstance as GrpcRaidBossInstance, LeaderboardEntry as GrpcLeaderboardEntry, RaidBossView } from "../../_proto/raidbossservice_pb";
 import { environment } from '../../environments/environment';
+import { Empty } from "google-protobuf/google/protobuf/empty_pb";
 
 //const FEED_URL = "ws://localhost:4200/raidbossapi/stream/raidboss/all-events";
 
@@ -70,7 +71,7 @@ export class RaidBossService implements OnInit {
       grpcInstance.getKilledBy());
   }
 
-  createBoss(instance: string, groupId: string, bossDefinitionId: string): Observable<RaidBossInstance> {
+  createBoss(instance: string, groupId: string, bossDefinitionId: string): Observable<Empty> {
 
     let message = new RaidBossCreate();
     message.setBossInstanceId(instance);
@@ -79,13 +80,13 @@ export class RaidBossService implements OnInit {
 
     console.log("Sending boss create ", message.getBossInstanceId(), " ", message.getBossDefId(), " ", message.getGroupId());
 
-    return new Observable<RaidBossInstance>(obs => {
-      const req = this.raidbossClient.createRaidBoss(message, (err: ServiceError, response: GrpcRaidBossInstance) => {
+    return new Observable<Empty>(obs => {
+      const req = this.raidbossClient.createRaidBoss(message, (err: ServiceError, response: Empty) => {
         if (err) {
           obs.error(err);
         }
 
-        obs.next(this.fromGrpcRaidBoss(response));
+        obs.next(response);
         obs.complete();
       });
 
@@ -94,17 +95,44 @@ export class RaidBossService implements OnInit {
   }
 
   // Handle attacks
-  attackBoss(bossInstanceId: string, playerId: string, damage: number) : Observable<RaidBossInstance> {
+  attackBoss(bossInstanceId: string, playerId: string, damage: number) : Observable<Empty> {
     let message = new RaidBossAttack();
     message.setBossInstanceId(bossInstanceId);
     message.setDamage(damage);
     message.setPlayerId(playerId);
 
-    return new Observable<RaidBossInstance>(obs => {
-      const req = this.raidbossClient.attackRaidBoss(message, (err: ServiceError, response: GrpcRaidBossInstance) => {
+    return new Observable<Empty>(obs => {
+      const req = this.raidbossClient.attackRaidBoss(message, (err: ServiceError, response: Empty) => {
         if (err) {
           obs.error(err);
         }
+
+        obs.next(response);
+        obs.complete();
+      });
+
+      return () => req.cancel();
+    });
+
+  }
+
+
+  // Handle views
+  viewBoss(bossInstanceId: string) : Observable<RaidBossInstance> {
+    let message = new RaidBossView();
+    message.setBossInstanceId(bossInstanceId);
+
+    console.log("Sending boss view ", message.getBossInstanceId());
+
+    return new Observable<RaidBossInstance>(obs => {
+      const req = this.raidbossClient.viewRaidBoss(message, (err: ServiceError, response: GrpcRaidBossInstance) => {
+        if (err) {
+          console.log("err boss view ", err);
+
+          obs.error(err);
+        }
+
+        console.log("boss view ", response);
 
         obs.next(this.fromGrpcRaidBoss(response));
         obs.complete();

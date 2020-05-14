@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // This can point to a local test environment or your Lightbend Cloudstate host
-  cloudstatehost: "https://justin-test-1.us-east1.apps.lbcs.io"
+  cloudstatehost: "http://127.0.0.1:8080"
 };
 
 /*
