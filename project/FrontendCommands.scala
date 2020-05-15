@@ -6,5 +6,5 @@ object FrontendCommands {
   val dependencyInstall: String = "npm install"
   val test: String = "ng test"
   val serve: String = "ng serve"
-  val build: String = "ng build"
+  val build: String = "ng build --prod"
 }

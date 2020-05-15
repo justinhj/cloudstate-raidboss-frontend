@@ -39,7 +39,7 @@ docker push [YOUR DOCKER REGISTRY]/raidbossfrontend
 
 ### Run the Docker image
 
-`docker run -d -p 80:3000 [YOUR DOCKER REGISTRY]/raidbossfrontend`
+`docker run -d -p 80:3000 --rm --name raidbossfrontend [YOUR DOCKER REGISTRY]/raidbossfrontend`
 
 ## Implemetation details
 
