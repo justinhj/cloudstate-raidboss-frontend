@@ -71,6 +71,9 @@ export class RaidBossService implements OnInit {
       grpcInstance.getKilledBy());
   }
 
+  // See here for the Observable contract
+  // http://reactivex.io/documentation/contract.html
+
   createBoss(instance: string, groupId: string, bossDefinitionId: string): Observable<Empty> {
 
     let message = new RaidBossCreate();
@@ -83,11 +86,14 @@ export class RaidBossService implements OnInit {
     return new Observable<Empty>(obs => {
       const req = this.raidbossClient.createRaidBoss(message, (err: ServiceError, response: Empty) => {
         if (err) {
+          console.log("Error! ", err);
           obs.error(err);
-        }
+        } else {
+          console.log("Response! ", response, err);
 
-        obs.next(response);
-        obs.complete();
+          obs.next(response);
+          obs.complete();
+        }
       });
 
       return () => req.cancel();

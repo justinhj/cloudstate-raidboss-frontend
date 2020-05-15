@@ -8,7 +8,8 @@
         <table class="u-full-width">
             <thead>
             <tr>
-                <th>Boss def ID</th>
+                <th>Boss type</th>
+                <th>Group</th>
                 <th>Health</th>
             </tr>
             </thead>
@@ -16,6 +17,7 @@
 
             <tr>
                 <td>{{ activeBoss ? activeBoss.bossDefId : "?" }}</td>
+                <td>{{ activeBoss ? activeBoss.groupId : "?" }}</td>
                 <td>{{ activeBoss ? activeBoss.health : "?" }}</td>
             </tr>
             </tbody>

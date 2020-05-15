@@ -40,17 +40,18 @@ export class ActiveBossListComponent implements OnInit {
   // }
 
   addRaidBoss(raidBoss) {
-    this.raidBossService.createBoss(raidBoss.instanceId, raidBoss.groupId, raidBoss.bossDefinitionId).pipe(
+    this.raidBossService.createBoss(raidBoss.instanceId, raidBoss.groupId, raidBoss.bossDefinitionId)
+    .pipe(
       flatMap(result =>
         this.raidBossService.viewBoss(raidBoss.instanceId))
     ).subscribe(boss => {
 
-      var existingBoss = this.raidbosses.find(boss => boss.instanceId == boss.instanceId);
+      var existingBoss = this.raidbosses.find(boss => raidBoss.instanceId == boss.instanceId);
       if(existingBoss) {
         // update local boss
-        console.log("Updating boss ", boss.instanceId);
+        console.log("Updating boss ", boss.instanceId, existingBoss);
         if(existingBoss) {
-          existingBoss = boss;
+          existingBoss.health = boss.health;
         }
       } else {
         console.log("Adding boss ", boss, "from", raidBoss, " event");
@@ -60,9 +61,14 @@ export class ActiveBossListComponent implements OnInit {
   }
 
   attackRaidBoss(event) {
-    this.raidBossService.attackBoss(event.bossInstanceId, event.playerId, event.damage).subscribe(
+    this.raidBossService.attackBoss(event.bossInstanceId, event.playerId, event.damage)
+    .pipe(
+      flatMap(result =>
+        this.raidBossService.viewBoss(event.bossInstanceId))
+    )
+    .subscribe(
       result  => {
-        // update local boss
+        // update local boss things that have changed
         var x = this.raidbosses.find(boss => boss.instanceId == event.bossInstanceId);
         if(x) {
           x.health = result.health
