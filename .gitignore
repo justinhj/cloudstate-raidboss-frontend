@@ -56,3 +56,4 @@ public/
 ui/src/_proto/
 
 project/metals.sbt
+.env
