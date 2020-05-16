@@ -16,7 +16,7 @@ services:
       - net1
 
   raidbossservice:
-    image: justinhj/raidboss-service:latest
+    image: ${REGISTRY?Specify REGISTRY as an environment variable or create a .env file in this folder}/raidboss-service:latest
     container_name: raidbossservice
     environment:
       - DEBUG="cloudstate"

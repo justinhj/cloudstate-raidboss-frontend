@@ -10,5 +10,17 @@ The docker-compose.yml file in this folder brings up an environment which you ca
 
 See []() for information on the usage of docker-compose.
 
-`docker-compose up -d` brings up the environment while `docker-compose down` will shut it down and remove the containers.
+## Configuration
+
+To configure where to find the image for the service please create a file called `.env` in this folder and then add the following contents:
+
+```
+REGISTRY=YOUR_REPO_NAME
+```
+
+## Operation
+
+`docker-compose up -d` brings up the environment
+
+`docker-compose down` will shut it down and remove the containers.
 
