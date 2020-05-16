@@ -8,7 +8,7 @@ In order to test a web frontend that connects to Cloudstate you need three thing
 
 The docker-compose.yml file in this folder brings up an environment which you can then access from your web application using the address 127.0.0.1:8080
 
-See []() for information on the usage of docker-compose.
+See [https://docs.docker.com/compose/](https://docs.docker.com/compose/) for information on the usage of docker-compose.
 
 ## Configuration
 
